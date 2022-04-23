@@ -14,6 +14,10 @@ import java.util.List;
 @RunWith(MockitoJUnitRunner.class)
 public class CatTest {
 
+
+    @Mock
+    Feline feline;
+
     @Test
     public void shouldReturnMeow() {
         Cat cat = new Cat(feline);
@@ -26,17 +30,16 @@ public class CatTest {
 
     @Test
     public void shoudReturnFood() throws Exception{
+        Feline feline = new Feline();
         Cat cat = new Cat(feline);
 
         List<String> expected = List.of("Животные", "Птицы", "Рыба");
-        Mockito.when(cat.getFood()).thenReturn(List.of("Животные", "Птицы", "Рыба"));
         List<String> actual = cat.getFood();
 
         assertArrayEquals(expected.toArray(), actual.toArray());
     }
 
-    @Mock
-    Feline feline;
+
 
 
 
