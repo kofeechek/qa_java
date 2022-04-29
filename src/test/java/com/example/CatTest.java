@@ -5,6 +5,7 @@ import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
 import org.mockito.Mockito;
+import org.mockito.stubbing.Answer;
 
 
 import static org.junit.Assert.assertArrayEquals;
@@ -30,10 +31,10 @@ public class CatTest {
 
     @Test
     public void shoudReturnFood() throws Exception{
-        Feline feline = new Feline();
         Cat cat = new Cat(feline);
 
         List<String> expected = List.of("Животные", "Птицы", "Рыба");
+        Mockito.when(feline.eatMeat()).thenReturn(List.of("Животные", "Птицы", "Рыба"));
         List<String> actual = cat.getFood();
 
         assertArrayEquals(expected.toArray(), actual.toArray());

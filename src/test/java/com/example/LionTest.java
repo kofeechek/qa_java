@@ -6,6 +6,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
 import org.mockito.Mock;
+import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
 import java.util.List;
 import static org.junit.Assert.assertEquals;
@@ -16,8 +17,6 @@ public class LionTest {
 
     @Mock
     static Feline feline;
-    @Mock
-    static Animal animal;
 
     final String sex;
     final boolean expected;
@@ -27,10 +26,7 @@ public class LionTest {
         this.expected = expected;
     }
 
-    @Test(expected = Exception.class)
-    public void shouldThrowException() throws Exception{
-        Lion lion = new Lion("Самчиха", feline);
-    }
+
 
     @Test
     public void shouldHasMane() throws Exception{
@@ -40,8 +36,8 @@ public class LionTest {
 
     @Test
     public void shouldReturnKittens() throws Exception {
-        Feline feline = new Feline();
         Lion lion = new Lion(sex, feline);
+        Mockito.when(feline.getKittens()).thenReturn(1);
         int actual = lion.getKittens();
         int expected = 1;
         assertEquals(actual, expected);
@@ -49,10 +45,10 @@ public class LionTest {
 
     @Test
     public void shouldReturnFood() throws Exception {
-        Feline feline = new Feline();
         Lion lion = new Lion(sex, feline);
 
         List<String> expected = List.of("Животные", "Птицы", "Рыба");
+        Mockito.when(feline.getFood("Хищник")).thenReturn(List.of("Животные", "Птицы", "Рыба"));
         List<String> actual = lion.getFood();
         Assert.assertArrayEquals(expected.toArray(), actual.toArray());
     }
