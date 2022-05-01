@@ -4,19 +4,18 @@ import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
+import org.mockito.Mock;
+import org.mockito.Mockito;
+import org.mockito.junit.MockitoJUnitRunner;
+
 import static org.junit.Assert.assertEquals;
 import java.util.List;
 
-@RunWith(Parameterized.class)
+@RunWith(MockitoJUnitRunner.class)
 public class FelineTest {
 
-    final int expected;
-    final int actual;
 
-    public FelineTest(int expected, int actual){
-        this.expected = expected;
-        this.actual = actual;
-    }
+
 
     @Test
     public void shouldReturnFamily(){
@@ -26,28 +25,17 @@ public class FelineTest {
         assertEquals(expected, actual);
     }
 
-    @Test
-    public void shouldReturnCustomKittens(){
-        Feline feline = new Feline();
-        assertEquals(feline.getKittens(actual), expected);
-    }
+
 
     @Test
     public void shouldReturnOneKitten(){
         Feline feline = new Feline();
+
         int expected = 1;
         int actual = feline.getKittens();
         assertEquals(expected, actual);
     }
 
-    @Parameterized.Parameters
-    public static  Object getParaData(){
-        return new Object[][]{
-                {0, 0},
-                {1, 1},
-                {15, 15}
-        };
-    }
 
     @Test
     public void shouldReturnFood() throws Exception{
